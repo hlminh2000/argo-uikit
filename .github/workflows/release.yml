@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build:
+  Release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,10 +21,6 @@ jobs:
       - name: Unit tests
         run: npm run test
 
-  Git_tag:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
       - name: Git tag
         run: |
           export UIKIT_VERSION=$(cat ./package.json | jq '.version' | sed -e 's/"//' -e 's/"//')
