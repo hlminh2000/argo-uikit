@@ -25,8 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Extract version
-        run: export UIKIT_VERSION=$(cat ./package.json | grep version | cut -d ':' -f2 | sed -e 's/"//' -e 's/",//')
-
-      - name: Print version
-        run: echo $UIKIT_VERSION
+      - name: Git tag
+        run: |
+          export UIKIT_VERSION=$(cat ./package.json | grep version | cut -d ':' -f2 | sed -e 's/"//' -e 's/",//')
+          git tag test-${UIKIT_VERSION}
+          git push https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/hlminh2000/argo-uikit
