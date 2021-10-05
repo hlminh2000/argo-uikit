@@ -28,5 +28,5 @@ jobs:
       - name: Git tag
         run: |
           export UIKIT_VERSION=$(cat ./package.json | jq '.version' | sed -e 's/"//' -e 's/"//')
+          echo $UIKIT_VERSION
           git tag test-${UIKIT_VERSION}
-          git push --tags https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PASSWORD }}@github.com/hlminh2000/argo-uikit
